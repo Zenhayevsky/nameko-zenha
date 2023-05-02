@@ -150,39 +150,3 @@ def test_handle_order_created(
     assert b'6' == product_one[b'in_stock']
     assert b'9' == product_two[b'in_stock']
     assert b'12' == product_three[b'in_stock']
-
-
-def test_delete_product(create_product, service_container):
-
-    stored_product = create_product()
-
-    with entrypoint_hook(service_container, 'get') as get:
-        loaded_product = get(stored_product['id'])
-
-    assert stored_product == loaded_product
-
-    with entrypoint_hook(service_container, 'delete_product') as delete:
-        loaded_product = delete(stored_product['id'])
-
-    with pytest.raises(NotFound):
-            with entrypoint_hook(service_container, 'get') as get:
-                get(stored_product['id'])
-
-
-def test_add_unit_product(create_product, service_container):
-
-    create_product(id=10, title='LZ 10', in_stock=5)
-
-    with entrypoint_hook(service_container, 'add_unit_product') as add:
-        add('10', 2)
-
-    with entrypoint_hook(service_container, 'get') as get:
-        product_test = get(10)
-    
-    assert product_test['in_stock'] == 7
-
-def test_add_unit_product_not_found(service_container):
-
-    with pytest.raises(NotFound):
-            with entrypoint_hook(service_container, 'add_unit_product') as add:
-                add('555', 2)

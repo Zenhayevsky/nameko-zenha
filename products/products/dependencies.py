@@ -57,16 +57,6 @@ class StorageWrapper:
         return self.client.hincrby(
             self._format_key(product_id), 'in_stock', -amount)
 
-# ----------------------------zenha ---------------------------------------------
-    
-    def delete(self, product_id):
-        self.client.delete(self._format_key(product_id))
-
-    def increment_stock(self, product_id, amount):
-        return self.client.hincrby(
-            self._format_key(product_id), 'in_stock', amount)
-        
-
 
 class Storage(DependencyProvider):
 
