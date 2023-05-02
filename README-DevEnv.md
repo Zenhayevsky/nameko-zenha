@@ -151,3 +151,34 @@ While nameko http service make it easy to call other nameko rpc/event services, 
 ## Deployment to Docker/K8S/CloudFoundry
 
 Please refer to [README-DevOps.md](README-DevOps.md)
+
+## Answers to the challenge
+
+In this document you will find my answers to the Back-end Python Developer challenge.
+First of all, I want to thank you for the opportunity and say that I enjoyed the challenge as I
+had never worked with Nameko before. I had some delays, mainly because I didn't have a
+machine with a Linux operating system, which led me to prepare the environment in a virtual
+box. As it did not have much memory available, many processes ran slowly.
+
+1. Follow README-DevEnv.md to setup dev environment for exercise
+✓ Able to run locally, debug, unit-test ✓ Able to smoke-test and performance test
+
+After installing the linux virtual box, i had to install some other extra tools like:
+● coverage
+● alembic
+● psycopg2
+
+To show that the whole environment preparation process occurred correctly, you can see photos of the test results in the document attached to the email.
+
+2. Do one of the following (both score more points)
+
+The required tweaks are in this pullrequest
+
+✓ Question 1: Why is performance degrading as the test run longer?
+✓ Question 2: How do you fix it?
+
+I suspect that the reason why the application performance decreases over time is the high
+usage of loops and Ifs and memory.
+Something that can help a lot in improving performance over time is the use of generators
+and, of course, reducing the use of loops. Because the tests run locally, memory is a limited
+factor that influences a lot the system performance
